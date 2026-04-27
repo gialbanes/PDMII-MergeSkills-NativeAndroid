@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.fatec.merge_skills.ui.components.StitchCard
 
 @Composable
 fun Aula04HomeScreen(onNavigateToDetails: () -> Unit) {
@@ -41,6 +42,12 @@ fun Aula04DetailScreen(onNavigateBack: () -> Unit) {
             style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.secondary
         )
+        StitchCard(
+            onClick = {},
+            modifier = Modifier.fillMaxSize()
+        ) { }
+
+
         
         Button(onClick = onNavigateBack) {
             Text("Voltar")
