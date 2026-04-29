@@ -24,11 +24,13 @@ import com.fatec.merge_skills.ui.screens.aula05.Aula05Action.Aula05Action
 
 @Composable
 @Preview
+// não armazena ou gerencia seu estado interno, apenas recebe e o que deve exibir via parâmetros e comunica mudanças através eventos
 fun Aula05Screen(
     modifier: Modifier = Modifier,
     viewModel: Aula05ViewModel = viewModel()
 ) {
     // Coleta reativa do Estado da UI
+    // recebe um objeto de estado e desenha as coisas com base nele
     val uiState by viewModel.uiState.collectAsState()
 
     Column(

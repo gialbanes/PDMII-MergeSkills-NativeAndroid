@@ -32,7 +32,9 @@ class MainActivity : ComponentActivity() {
                         composable("login") {
                             LoginScreen(
                                 onLoginSuccess = {
+                                    // mantem o login na pilha, o user pode voltar
                                     navController.navigate("showcase") {
+                                        // remove o login da pilha, o usuario nao pode voltar
                                         popUpTo("login") { inclusive = true }
                                     }
                                 }
