@@ -11,9 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.fatec.merge_skills.ui.screens.aula04.Aula04DetailScreen
-import com.fatec.merge_skills.ui.screens.aula04.Aula04HomeScreen
 import com.fatec.merge_skills.ui.theme.MergeskillskotlinTheme
+import com.fatec.merge_skills.ui.screens.auth.LoginScreen
+import com.fatec.merge_skills.ui.screens.showcase.ShowcaseScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,18 +26,26 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = "home",
+                        startDestination = "login",
                         modifier = Modifier.padding(innerPadding)
                     ) {
-                        composable("home") {
-                            Aula04HomeScreen(
-                                onNavigateToDetails = { navController.navigate("details") }
+                        composable("login") {
+                            LoginScreen(
+                                onLoginSuccess = {
+                                    navController.navigate("showcase") {
+                                        popUpTo("login") { inclusive = true }
+                                    }
+                                }
                             )
                         }
-                        
-                        composable("details") {
-                            Aula04DetailScreen(
-                                onNavigateBack = { navController.popBackStack() }
+
+                        composable("showcase") {
+                            ShowcaseScreen(
+                                onBackToLogin = {
+                                    navController.navigate("login") {
+                                        popUpTo("showcase") { inclusive = true }
+                                    }
+                                }
                             )
                         }
                     }
