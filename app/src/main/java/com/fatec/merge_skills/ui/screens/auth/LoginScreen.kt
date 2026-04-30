@@ -71,7 +71,8 @@ fun LoginScreen(
                 value = uiState.email,
                 onValueChange = {viewModel.onEmailChange(it)},
                 label = "E-mail",
-                placeholder = "email@gmail.com"
+                placeholder = "email@gmail.com",
+                // proximo pasos e add teclado, vou add no botao de ok do teclado uma funcionalida, pq geralmente no ok ele so abaixa
             )
         }
     }
