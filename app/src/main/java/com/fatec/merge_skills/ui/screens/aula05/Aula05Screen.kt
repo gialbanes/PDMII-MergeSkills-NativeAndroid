@@ -22,6 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fatec.merge_skills.ui.screens.aula05.Aula05Action.Aula05Action
 
+// Tela de exemplo do padrão MVVM.
+// Mostra um formulário com campo de nome, validação, estado de carregamento
+// e mensagens de sucesso/erro controladas pelo ViewModel.
+// A tela envia as actions para o viewModel que atualiza o state 
 @Composable
 @Preview
 // não armazena ou gerencia seu estado interno, apenas recebe e o que deve exibir via parâmetros e comunica mudanças através eventos

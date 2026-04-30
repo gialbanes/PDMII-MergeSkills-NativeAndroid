@@ -9,6 +9,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import com.fatec.merge_skills.ui.screens.aula05.Aula05Action.Aula05Action
+
+// ViewModel da tela Aula05.
+// Ele recebe as Actions da interface e gerencia o state atual da tela,
+// atualizando os dados, validando o formulário e simulando o envio com loading e sucesso.
+
 class Aula05ViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(Aula05UiState())
     val uiState: StateFlow<Aula05UiState> = _uiState.asStateFlow()

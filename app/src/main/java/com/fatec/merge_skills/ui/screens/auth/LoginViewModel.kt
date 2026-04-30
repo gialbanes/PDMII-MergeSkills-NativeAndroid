@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+// Estado da tela de login.
+// Guarda os dados digitados, o estado de carregamento,
+// mensagens de erro e se o login foi concluído com sucesso.
 data class LoginUiState(
     val email: String = "",
     val password: String = "",
@@ -17,6 +20,9 @@ data class LoginUiState(
     val isLoginSuccess: Boolean = false
 )
 
+// ViewModel responsável por controlar o login.
+// Ele recebe as alterações dos campos, valida os dados e simula o envio,
+// atualizando o estado que a tela exibe.
 class LoginViewModel : ViewModel() {
 
     private val _uiState = MutableStateFlow(LoginUiState())

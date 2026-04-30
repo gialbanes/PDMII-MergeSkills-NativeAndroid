@@ -14,6 +14,10 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.fatec.merge_skills.ui.theme.StitchError
 
+// Componente reutilizável de campo de texto do app.
+// Ele mostra um OutlinedTextField com label, placeholder opcional,
+// validação de erro e mensagem de erro abaixo do campo.
+
 @Composable
 fun StitchTextField(
     // TextField precisa de 3 strings para serem passadas

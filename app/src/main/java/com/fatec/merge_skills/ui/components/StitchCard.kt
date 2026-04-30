@@ -7,6 +7,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.fatec.merge_skills.ui.theme.Surface
 
+// Componente reutilizável de card do app.
+// Ele exibe um ElevatedCard com cor de fundo personalizada e, se receber onClick,
+// permite clique para navegar ou executar alguma ação. O conteúdo é renderizado em coluna.
+
 @Composable
 fun StitchCard(
     // o redirecionamento dele é responsabilidade de quem chama ele
