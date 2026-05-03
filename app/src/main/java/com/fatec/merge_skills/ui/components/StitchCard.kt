@@ -14,18 +14,15 @@ import com.fatec.merge_skills.ui.theme.Surface
 @Composable
 fun StitchCard(
     // o redirecionamento dele é responsabilidade de quem chama ele
-    // primeira propriedade: seta a cor de fundo
-    // segunda chama o content, que quem chama é a tela que usa o stitch
-    onClick:(() -> Unit)? = null,
+    onClick:(() -> Unit)? = null, // null = card nao clicavel
     modifier: Modifier = Modifier,
-    containerColor: Color = Surface,
-    // o content do card por default ja fica alinhado em coluna
-    content: @Composable ColumnScope.() -> Unit
+    containerColor: Color = Surface, // seta a cor de fundo
+    content: @Composable ColumnScope.() -> Unit // o conteudo é setado pela tela que usa o componente
 ) {
     // nativo do jetPackCompose
     ElevatedCard(
-        onClick = {onClick?.invoke()},
-        enabled = onClick != null,
+        onClick = {onClick?.invoke()}, // execute o invoke() se o onClick não for nulo
+        enabled = onClick != null, // se for diferente de null, o card é clicavel
         modifier = modifier,
     ) {
 

@@ -1,6 +1,5 @@
 package com.fatec.merge_skills.ui.screens.auth
 
-import android.R
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
@@ -21,24 +20,23 @@ fun LoginScreen(
     onLoginSuccess: () -> Unit,
     viewModel: LoginViewModel = viewModel()
 ) {
-    // usa o get pra saber se algo mudou
+
     // antes usava remember, mas agora preciso buscar na viewmodel
     val uiState by viewModel.uiState.collectAsState()
 
-    // Efeito para navegar quando o login for sucesso
     // LaunchedEffect observa estado na tela, no caso observar se o redirect de login teve sucesso
     LaunchedEffect(uiState.isLoginSuccess) {
         if (uiState.isLoginSuccess) {
             onLoginSuccess() // callback na tela de login para a proxima tela que ela chama
         }
     }
+
     // componente estruturante para sobrepor elementos
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(24.dp),
         contentAlignment = Alignment.Center
-
     ){
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -63,7 +61,7 @@ fun LoginScreen(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             Spacer(
-                // espacamente entre os componetes
+                // espaçamento entre os componetes
                 // add mais 16dp ao spacedBy no Column
                 modifier = Modifier.height(16.dp)
             )

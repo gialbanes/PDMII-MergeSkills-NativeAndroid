@@ -36,6 +36,7 @@ val MOCK_COURSES = listOf(
 fun ShowcaseScreen(
     onBackToLogin: () -> Unit
 ) {
+    // estrutura padrão da tela com uma barra fixa no topo com o titulo
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -46,6 +47,8 @@ fun ShowcaseScreen(
             )
         }
     ) { innerPadding ->
+        // renderização performática para carregar apenas o que aparece na tela
+        // a tela inteira rola para cima e para baixo
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -69,6 +72,7 @@ fun ShowcaseScreen(
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
+            // para cada curso, desenha um StitchCard
             items(MOCK_COURSES) { course ->
                 StitchCard(
                     onClick = { /* Ação de clique */ },
@@ -135,6 +139,7 @@ fun ShowcaseScreen(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Spacer(modifier = Modifier.height(12.dp))
+                // grade de duas colunas dentro de um item da lista vertical
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(2),
                     modifier = Modifier
@@ -142,7 +147,7 @@ fun ShowcaseScreen(
                         .height(340.dp),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
-                    userScrollEnabled = false
+                    userScrollEnabled = false // LazyColumn já possui scroll
                 ) {
                     items(MOCK_COURSES) { course ->
                         StitchCard(modifier = Modifier.fillMaxWidth()) {

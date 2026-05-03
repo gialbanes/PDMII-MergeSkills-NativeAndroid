@@ -20,8 +20,6 @@ import com.fatec.merge_skills.ui.theme.StitchError
 
 @Composable
 fun StitchTextField(
-    // TextField precisa de 3 strings para serem passadas
-    // propriedades:
     modifier: Modifier = Modifier,
     value: String,
     onValueChange:(String)->Unit,
