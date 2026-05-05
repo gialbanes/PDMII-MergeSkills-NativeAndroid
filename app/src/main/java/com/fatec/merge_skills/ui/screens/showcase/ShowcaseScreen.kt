@@ -1,5 +1,6 @@
 package com.fatec.merge_skills.ui.screens.showcase
 
+import android.R
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -13,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fatec.merge_skills.ui.components.StitchCard
 
@@ -23,6 +25,8 @@ data class MockCourse(
     val level: String
 )
 
+// collection
+// scroll e click demanda muit processamento,
 val MOCK_COURSES = listOf(
     MockCourse("1", "Layouts com Compose", "Aprendendo Column, Row e Box de forma profunda.", "Básico"),
     MockCourse("2", "Gestão de Estado", "Uso de remember, mutableStateOf e ViewModels.", "Intermediário"),
@@ -40,150 +44,43 @@ fun ShowcaseScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Showcase — Aula 05") },
+                title = {
+                    Text(
+                        text = "Showcase",
+                        style = MaterialTheme.typography.displayMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface
+
                 )
             )
         }
-    ) { innerPadding ->
-        // renderização performática para carregar apenas o que aparece na tela
-        // a tela inteira rola para cima e para baixo
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(vertical = 16.dp)
+    ) { innerPadding -> // propriedade que a funcao scaffold retorna pra não ultrapassar os limites de statusbar e navigationbar
+        Column(
+
         ) {
-            item {
+            // é o que eu faco com o componente dedicado lazycolumn
+            for(i in MOCK_COURSES){
                 Text(
-                    text = "Design System Components",
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
+                    text = "Title" + i.title,
+                    style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.primary
                 )
-                Text(
-                    text = "Demonstração do StitchCard em uma LazyColumn",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Spacer(modifier = Modifier.height(16.dp))
             }
-
-            // para cada curso, desenha um StitchCard
-            items(MOCK_COURSES) { course ->
-                StitchCard(
-                    onClick = { /* Ação de clique */ },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                text = course.title,
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold
-                            )
-                            Badge(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                            ) {
-                                Text(course.level)
-                            }
-                        }
-
-                        Spacer(modifier = Modifier.height(8.dp))
-
-                        Text(
-                            text = course.description,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-
-                        Spacer(modifier = Modifier.height(12.dp))
-
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                imageVector = Icons.Default.Info,
-                                contentDescription = null,
-                                modifier = Modifier.size(16.dp),
-                                tint = MaterialTheme.colorScheme.secondary
-                            )
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text(
-                                text = "Clique para ver detalhes",
-                                style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.secondary
-                            )
-                        }
-                    }
-                }
-            }
-
-            item {
-                Spacer(modifier = Modifier.height(24.dp))
-                Text(
-                    text = "Grids e Listas",
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary
-                )
-                Text(
-                    text = "LazyVerticalGrid com 2 colunas responsivas",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-                // grade de duas colunas dentro de um item da lista vertical
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(2),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(340.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    userScrollEnabled = false // LazyColumn já possui scroll
-                ) {
-                    items(MOCK_COURSES) { course ->
-                        StitchCard(modifier = Modifier.fillMaxWidth()) {
-                            Column(modifier = Modifier.padding(12.dp)) {
-                                Text(
-                                    text = course.title,
-                                    style = MaterialTheme.typography.labelLarge,
-                                    fontWeight = FontWeight.Bold
-                                )
-                                Spacer(modifier = Modifier.height(6.dp))
-                                Badge(
-                                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-                                ) {
-                                    Text(course.level)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            item {
-                Spacer(modifier = Modifier.height(24.dp))
-                Button(
-                    onClick = onBackToLogin,
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                ) {
-                    Text("Voltar para o Login")
-                }
-                Spacer(modifier = Modifier.height(32.dp))
-            }
+            // mostrar listagem de forma performática, paginacao, componente estruturante
+            LazyColumn(
+                // como se fosse um css
+                // se é config geral eu acesso modifier
+                modifier = Modifier
+                    .fillMaxSize()
+                    // a ordem importa
+                    // a mesma coisa do spacer com o column
+                    .padding(innerPadding)
+                    .padding(horizontal = 16.dp)
+            ) { }
         }
     }
 }

@@ -71,7 +71,38 @@ fun LoginScreen(
                 label = "E-mail",
                 placeholder = "email@gmail.com",
                 // proximo pasos e add teclado, vou add no botao de ok do teclado uma funcionalida, pq geralmente no ok ele so abaixa
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done
+                ),
+                isError = uiState.error?.contains("Senha") == true || uiState.error?.contains("6 caracteres") == true,
+                errorMessage = if (uiState.error?.contains("Senha") == true || uiState.error?.contains("6 caracteres") == true) uiState.error else null
             )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Button(
+                onClick = { viewModel.onLoginClick() },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+                enabled = !uiState.isLoading,
+                shape = androidx.compose.foundation.shape.RoundedCornerShape(12.dp)
+            ) {
+                if (uiState.isLoading) {
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        modifier = Modifier.size(24.dp),
+                        strokeWidth = 2.dp
+                    )
+                } else {
+                    Text(
+                        text = "Entrar",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
         }
     }
 }
