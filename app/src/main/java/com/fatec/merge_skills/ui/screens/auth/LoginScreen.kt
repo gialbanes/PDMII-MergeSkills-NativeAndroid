@@ -79,6 +79,22 @@ fun LoginScreen(
                 errorMessage = if (uiState.error?.contains("Senha") == true || uiState.error?.contains("6 caracteres") == true) uiState.error else null
             )
 
+            StitchTextField(
+                value = uiState.password,
+                onValueChange = { viewModel.onPasswordChange(it) },
+                label = "Senha",
+                placeholder = "••••••",
+                secureTextEntry = true,
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done
+                ),
+                isError = uiState.error?.contains("Senha") == true || uiState.error?.contains("6 caracteres") == true,
+                errorMessage = if (uiState.error?.contains("Senha") == true || uiState.error?.contains("6 caracteres") == true) uiState.error else null
+            )
+
+
             Spacer(modifier = Modifier.height(8.dp))
 
             Button(
