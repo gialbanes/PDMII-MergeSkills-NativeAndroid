@@ -62,15 +62,31 @@ fun ShowcaseScreen(
         Column(
 
         ) {
+            // eu consigo exibir a lista, mas não é a melhor prática, pois existem ações que eu devo configurar direto do meu item (clique), as quais precisam de um listener, não fica performático
             // é o que eu faco com o componente dedicado lazycolumn
-            for(i in MOCK_COURSES){
+/*            for(i in MOCK_COURSES){
+                Row(){
+                    Text(
+                        text = "ID" + i.title,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Spacer(Modifier.width(12.dp))
+                    Text(
+                        text = "Title" + i.title,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+
+
+                }
                 Text(
-                    text = "Title" + i.title,
+                    text = "-----------------------------------",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.primary
                 )
-            }
-            // mostrar listagem de forma performática, paginacao, componente estruturante
+            }*/
+            // mostrar listagem vertical de forma performática, paginacao, componente estruturante
             LazyColumn(
                 // como se fosse um css
                 // se é config geral eu acesso modifier
@@ -79,8 +95,44 @@ fun ShowcaseScreen(
                     // a ordem importa
                     // a mesma coisa do spacer com o column
                     .padding(innerPadding)
-                    .padding(horizontal = 16.dp)
-            ) { }
+                    .padding(horizontal = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                contentPadding = PaddingValues(16.dp)
+            ) {
+                // duas propriedades para setar: item e items
+                // dentro dela posso ter varias listas e encadear, exemplo: contatos por letra inicial
+                // estrutura visual do item da minha lista, determino como vai ser atraves do composable
+                item{
+                    Text(
+                        text = "Primeira Seção de cursos",
+                        style = MaterialTheme.typography.displayMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+                // coleção que vou percorrer, nesse caso a MOCK_COURSES, percorrendo id, title, description e value, com cada objeto
+                // via lambda eu aceso um item da minha lista
+                items(MOCK_COURSES) { course ->
+                    Text(
+                        text = "ID ${course.id}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+                item{
+                    Text(
+                        text = "Segunda Seção de cursos",
+                        style = MaterialTheme.typography.displayMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+                items(MOCK_COURSES) { course ->
+                    Text(
+                        text = "ID ${course.id}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
         }
     }
 }
